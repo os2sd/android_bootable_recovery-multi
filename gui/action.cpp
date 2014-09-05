@@ -1718,6 +1718,40 @@ int GUIAction::flashimage(std::string arg)
 	return 0;
 }
 
+int GUIAction::switchos2sdmode(std::string arg)
+{
+	int op_status = 0;
+	string os2sd;
+
+	operation_start("Switch OS2SD Mode");
+	if (simulate) {
+		simulate_progress_bar();
+	} else {
+		DataManager::GetValue("tw_os2sd_internal", os2sd);
+		if (os2sd=="OS2SD") {
+			TWFunc::copy_file("/etc/twrp_int.fstab", "/cache/recovery/recovery.fstab", 0644);
+			TWFunc::copy_file("/etc/twrp_int.fstab","/etc/recovery.fstab",0644);
+			DataManager::SetValue("tw_os2sd_internal","Internal");
+			printf("os2sd_switch: Internal.\n");
+		} else {
+			TWFunc::copy_file("/etc/twrp_sd.fstab", "/cache/recovery/recovery.fstab", 0644);
+			TWFunc::copy_file("/etc/twrp_sd.fstab","/etc/recovery.fstab",0644);
+			DataManager::SetValue("tw_os2sd_internal","OS2SD");
+			printf("os2sd_switch: OS2SD.\n");
+		}
+
+		printf("=> Processing new recovery.fstab\n");
+		if (!PartitionManager.Process_Fstab("/etc/recovery.fstab", 1)) {
+			printf("Failing out of recovery due to problem with new recovery.fstab.\n");
+			//return -1;
+		}
+		PartitionManager.Output_Partition_Logging();
+		sync();
+	}
+	operation_end(op_status, simulate);
+	return 0;
+}
+
 int GUIAction::getKeyByName(std::string key)
 {
 	if (key == "home")			return KEY_HOME;

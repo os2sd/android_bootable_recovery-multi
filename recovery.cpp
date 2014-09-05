@@ -945,12 +945,17 @@ main(int argc, char **argv) {
 	gui_init();
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
-	printf("=> Processing recovery.fstab\n");
+	
+/* OS2SD forces this into DataManager_LoadDefaults.
+
+ 	printf("=> Processing recovery.fstab\n");
 	if (!PartitionManager.Process_Fstab("/etc/recovery.fstab", 1)) {
 		LOGE("Failing out of recovery due to problem with recovery.fstab.\n");
 		//return -1;
 	}
 	PartitionManager.Output_Partition_Logging();
+*/
+
 	// Load up all the resources
 	gui_loadResources();
 

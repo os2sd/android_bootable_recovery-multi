@@ -2604,6 +2604,20 @@
 			</object>
 
 			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
+				<placement x="%col2_x%" y="%row4_y%" />
+				<text>OS2SD Mode</text>
+				<action function="page">switch_os2sd_internal</action>
+			</object>
+
+			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%col2_x%" y="%row4_y%" />
+				<text>Internal Mode</text>
+				<action function="page">switch_os2sd_internal</action>
+			</object>
+
+			<object type="button">
 				<condition var1="tw_show_dumlock" var2="1" />
 				<placement x="%col2_x%" y="%row4_y%" />
 				<text>HTC Dumlock</text>
@@ -2647,6 +2661,7 @@
 			</object>
 
 			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
 				<placement x="%col1_x%" y="%row1_y%" />
 				<text></text>
 				<image resource="minus_button" />
@@ -2654,6 +2669,7 @@
 			</object>
 
 			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
 				<placement x="%sd_plus_x%" y="%row1_y%" />
 				<text></text>
 				<image resource="plus_button" />
@@ -2661,8 +2677,31 @@
 			</object>
 
 			<object type="text">
-				<placement x="%sdext_text_x%" y="%sdext_text_y%" />
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
+				<placement x="%center_x%" y="%sdext_text_y%" placement="5" />
 				<text>EXT Size: %tw_sdext_size%</text>
+			</object>
+
+			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%col1_x%" y="%row1_y%" />
+				<text></text>
+				<image resource="minus_button" />
+				<action function="addsubtract">tw_os2sdsystem_size-128</action>
+			</object>
+
+			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%sd_plus_x%" y="%row1_y%" />
+				<text></text>
+				<image resource="plus_button" />
+				<action function="addsubtract">tw_os2sdsystem_size+128</action>
+			</object>
+
+			<object type="text">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%center_x%" y="%sdext_text_y%" placement="5" />
+				<text>OS2SD System: %tw_os2sdsystem_size%</text>
 			</object>
 
 			<object type="button">
@@ -2680,35 +2719,39 @@
 			</object>
 
 			<object type="text">
-				<placement x="%sdswap_text_x%" y="%sdswap_text_y%" />
+				<placement x="%center_x%" y="%sdswap_text_y%" placement="5" />
 				<text>Swap Size: %tw_swap_size%</text>
 			</object>
 
-			<object type="text">
-				<placement x="%col1_x%" y="%sdfilesystem_text_y%" />
-				<text>File system: %tw_sdpart_file_system%</text>
+			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%col1_x%" y="%sddata_button_y%" />
+				<text></text>
+				<image resource="minus_button" />
+				<action function="addsubtract">tw_os2sddata_size-128</action>
 			</object>
 
 			<object type="button">
-				<placement x="%col1_x%" y="%sdfilesystem_button_y%" />
-				<text>EXT3</text>
-				<action function="set">tw_sdpart_file_system=ext3</action>
-			</object>
-
-			<object type="button">
-				<condition var1="tw_sdext_disable_ext4" var2="0" />
-				<placement x="%col2_x%" y="%sdfilesystem_button_y%" />
-				<text>EXT4</text>
-				<action function="set">tw_sdpart_file_system=ext4</action>
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%sd_plus_x%" y="%sddata_button_y%" />
+				<text></text>
+				<image resource="plus_button" />
+				<action function="addsubtract">tw_os2sddata_size+128</action>
 			</object>
 
 			<object type="text">
-				<placement x="%col1_x%" y="%row12_text_y%" />
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%center_x%" y="%sddata_text_y%" placement="5" />
+				<text>OS2SD Data: %tw_os2sddata_size%</text>
+			</object>
+
+			<object type="text">
+				<placement x="%center_x%" y="%row12_text_y%" placement="5" />
 				<text>You will lose all files on your SD card!</text>
 			</object>
 
 			<object type="text">
-				<placement x="%col1_x%" y="%row13_text_y%" />
+				<placement x="%center_x%" y="%row13_text_y%" placement="5" />
 				<text>This action cannot be undone!</text>
 			</object>
 
@@ -3526,6 +3569,66 @@
 			</object>
 
 			<object type="template" name="footer" />
+		</page>
+
+		<page name="switch_os2sd_internal">
+			<object type="template" name="header" />
+
+			<object type="text">
+				<placement x="%center_x%" y="%row1_header_y%" placement="5"/>
+				<text>Switch OS2SD/Internal Mode?</text>
+			</object>
+
+			<object type="text">
+				<placement x="%center_x%" y="%row2_text_y%" placement="5"/>
+				<text>This will reset the recovery</text>
+			</object>
+
+			<object type="text">
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
+				<placement x="%center_x%" y="%row3_text_y%" placement="5"/>
+				<text>into OS2SD mode.</text>
+			</object>
+
+			<object type="text">
+				<condition var1="tw_os2sd_internal" op="=" var2="OS2SD" />
+				<placement x="%center_x%" y="%row3_text_y%" placement="5"/>
+				<text>into Internal mode.</text>
+			</object>
+
+			<object type="button">
+				<condition var1="tw_os2sd_internal" op="=" var2="Internal" />
+				<placement x="%col_center_x%" y="%row3_y%" />
+				<text>Do Not Switch</text>
+				<action function="page">advanced</action>
+			</object>
+
+			<object type="action">
+				<touch key="home" />
+				<action function="page">main</action>
+			</object>
+
+			<object type="action">
+				<touch key="back" />
+				<action function="page">advanced</action>
+			</object>
+
+			<object type="slider">
+				<placement x="%slider_x%" y="%slider_y%" />
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=switchos2sdmode</action>
+					<action function="set">tw_action_text1=Switching OS2SD/Internal Mode</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="set">tw_complete_text1=Done.</action>
+					<action function="page">action_page</action>
+				</actions>
+			</object>
+
+			<object type="text">
+				<placement x="%center_x%" y="%slider_text_y%" placement="4" />
+				<text>Swipe to Change Mode</text>
+			</object>
 		</page>
 
 		<page name="installsu">
