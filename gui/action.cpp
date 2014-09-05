@@ -1306,6 +1306,7 @@ int GUIAction::doAction(Action action, int isThreaded /* = 0 */)
 						waitpid(child_pid, &status, 0);
 					}
 				}
+				PartitionManager.Update_System_Details();
 				if (DataManager::GetIntValue(TW_HAS_INJECTTWRP) == 1 && DataManager::GetIntValue(TW_INJECT_AFTER_ZIP) == 1) {
 					operation_start("ReinjectTWRP");
 					gui_print("Injecting TWRP into boot image...\n");
@@ -1495,6 +1496,39 @@ int GUIAction::doAction(Action action, int isThreaded /* = 0 */)
 			else
 				op_status = 1; // fail
 
+			operation_end(op_status, simulate);
+			return 0;
+		}
+		if (function == "switchos2sdmode")
+		{
+			int op_status = 0;
+			string os2sd;
+
+			operation_start("Switch OS2SD Mode");
+			if (simulate) {
+				simulate_progress_bar();
+			} else {
+				DataManager::GetValue("tw_os2sd_internal", os2sd);
+				if (os2sd=="OS2SD") {
+					TWFunc::copy_file("/etc/twrp_int.fstab", "/cache/recovery/recovery.fstab", 0644);
+						TWFunc::copy_file("/etc/twrp_int.fstab","/etc/recovery.fstab",0644);
+						DataManager::SetValue("tw_os2sd_internal","Internal");
+						printf("os2sd_switch: Internal.\n");
+				} else {
+					TWFunc::copy_file("/etc/twrp_sd.fstab", "/cache/recovery/recovery.fstab", 0644);
+					TWFunc::copy_file("/etc/twrp_sd.fstab","/etc/recovery.fstab",0644);
+					DataManager::SetValue("tw_os2sd_internal","OS2SD");
+					printf("os2sd_switch: OS2SD.\n");
+				}
+
+				printf("=> Processing new recovery.fstab\n");
+				if (!PartitionManager.Process_Fstab("/etc/recovery.fstab", 1)) {
+					printf("Failing out of recovery due to problem with new recovery.fstab.\n");
+					//return -1;
+				}
+				PartitionManager.Output_Partition_Logging();
+				sync();
+			}
 			operation_end(op_status, simulate);
 			return 0;
 		}

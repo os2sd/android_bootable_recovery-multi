@@ -4,8 +4,8 @@
 	<details>
 		<resolution width="320" height="480" />
 		<author>TeamWin</author>
-		<title>Backup Naowz</title>
-		<description>Default basic theme</description>
+		<title>Backup Naowz (NOW WITH OS2SD!)</title>
+		<description>modifed theme with TechVendetta and bigsupersquid tweaks to handle OS2SD partitioning</description>
 		<preview>preview.jpg</preview>
 	</details>
 
@@ -154,12 +154,15 @@
 		<variable name="listbox_tz_height" value="189" />
 		<variable name="listbox_background" value="#303030" />
 		<variable name="listbox_spacing" value="12" />
-		<variable name="sd_plus_x" value="187" />
+		<variable name="sd_plus_x" value="275" />
 		<variable name="sdext_text_x" value="56" />
 		<variable name="sdext_text_y" value="83" />
 		<variable name="sdswap_button_y" value="111" />
 		<variable name="sdswap_text_x" value="56" />
 		<variable name="sdswap_text_y" value="110" />
+		<variable name="sddata_button_y" value="137" />
+		<variable name="sddata_text_x" value="56" />
+		<variable name="sddata_text_y" value="136" />
 		<variable name="sdfilesystem_text_y" value="144" />
 		<variable name="sdfilesystem_button_y" value="168" />
 		<variable name="lock_x" value="27" />
@@ -214,7 +217,7 @@
 			<object type="text" color="%text_color%">
 				<font resource="font" />
 				<placement x="65" y="3" />
-				<text>TeamWin Recovery v%tw_version%</text>
+				<text>TWRP v%tw_version%-MULTI-%tw_os2sd_internal%</text>
 			</object>
 
 			<object type="text" color="%text_color%">
