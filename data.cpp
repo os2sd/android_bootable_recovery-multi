@@ -686,9 +686,11 @@ void DataManager::SetDefaultValues()
 	mPersist.SetValue(TW_RM_RF_VAR, "0");
 	mPersist.SetValue(TW_SKIP_MD5_CHECK_VAR, "0");
 	mPersist.SetValue(TW_SKIP_MD5_GENERATE_VAR, "0");
-	mPersist.SetValue(TW_SDEXT_SIZE, "0");
-	mPersist.SetValue(TW_SWAP_SIZE, "0");
-	mPersist.SetValue(TW_SDPART_FILE_SYSTEM, "ext3");
+	mPersist.SetValue(TW_SYSTEM_SIZE, "512");
+	mPersist.SetValue(TW_SWAP_SIZE, "64");
+	mPersist.SetValue(TW_DATA_SIZE, "1024");
+	mPersist.SetValue(TW_SYSTEM_FILE_SYSTEM, "ext4");
+	mPersist.SetValue(TW_DATA_FILE_SYSTEM, "f2fs");
 	mPersist.SetValue(TW_TIME_ZONE_GUISEL, "CST6;CDT,M3.2.0,M11.1.0");
 	mPersist.SetValue(TW_TIME_ZONE_GUIOFFSET, "0");
 	mPersist.SetValue(TW_TIME_ZONE_GUIDST, "1");
