@@ -1784,11 +1784,7 @@ int TWPartitionManager::Partition_SDCard(void) {
 	swap_str = "+";
 	swap_str += temp;
 	swap_str += "MB";
-	memset(temp, 0, sizeof(temp));
-	sprintf(temp, "%i", data);
-	data_str = "+";
-	data_str += temp;
-	data_str += "MB";
+	data_str = "-0";
 
 
 	gui_msg("remove_part_table=Removing partition table...");
@@ -1800,7 +1796,7 @@ int TWPartitionManager::Partition_SDCard(void) {
 		return false;
 	}
 	gui_msg(Msg("create_part=Creating {1} partition...")("FAT32"));
-	Command = "sgdisk  --new=0:0:" + fat_str + " --change-name=0:\"Microsoft basic data\" --typecode=0:EBD0A0A2-B9E5-4433-87C0-68B6B72699C7 " + Device;
+	Command = "sgdisk --new=0:0:" + fat_str + " --change-name=0:\"Microsoft basic data\" --typecode=0:EBD0A0A2-B9E5-4433-87C0-68B6B72699C7 " + Device;
 	LOGINFO("Command is: '%s'\n", Command.c_str());
 	if (TWFunc::Exec_Cmd(Command) != 0) {
 		gui_msg(Msg(msg::kError, "unable_to_create_part=Unable to create {1} partition.")("FAT32"));
