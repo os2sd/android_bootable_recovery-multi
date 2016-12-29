@@ -79,9 +79,11 @@
 
 #define TW_BACKUPS_FOLDER_VAR       "tw_backups_folder"
 
-#define TW_SDEXT_SIZE               "tw_sdext_size"
+#define TW_SYSTEM_SIZE              "tw_system_size"
 #define TW_SWAP_SIZE                "tw_swap_size"
-#define TW_SDPART_FILE_SYSTEM       "tw_sdpart_file_system"
+#define TW_DATA_SIZE                "tw_data_size"
+#define TW_SYSTEM_FILE_SYSTEM       "tw_system_file_system"
+#define TW_DATA_FILE_SYSTEM         "tw_data_file_system"
 #define TW_TIME_ZONE_GUISEL         "tw_time_zone_guisel"
 #define TW_TIME_ZONE_GUIOFFSET      "tw_time_zone_guioffset"
 #define TW_TIME_ZONE_GUIDST         "tw_time_zone_guidst"

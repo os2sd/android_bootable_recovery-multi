@@ -3615,24 +3615,24 @@
 
 			<text style="text_m_accent">
 				<placement x="%center_x%" y="%row5_y%" placement="5"/>
-				<text>{@part_sd_ext_sz=EXT Size:}</text>
+				<text>{@part_sd_system_sz=System Size:}</text>
 			</text>
 
 			<text style="text_m">
 				<placement x="%center_x%" y="%row6a_y%" placement="5"/>
-				<text>%tw_sdext_size%</text>
+				<text>%tw_system_size%</text>
 			</text>
 
 			<button style="button_quarter_width">
 				<placement x="%indent%" y="%row6_y%"/>
 				<text>{@part_sd_m=-}</text>
-				<action function="addsubtract">tw_sdext_size-256</action>
+				<action function="addsubtract">tw_system_size-64</action>
 			</button>
 
 			<button style="button_quarter_width">
 				<placement x="%btn4_col4_x%" y="%row6_y%"/>
 				<text>{@part_sd_p=+}</text>
-				<action function="addsubtract">tw_sdext_size+256</action>
+				<action function="addsubtract">tw_system_size+64</action>
 			</button>
 
 			<text style="text_m_accent">
@@ -3648,35 +3648,57 @@
 			<button style="button_quarter_width">
 				<placement x="%indent%" y="%row10_y%"/>
 				<text>{@part_sd_m=-}</text>
-				<action function="addsubtract">tw_swap_size-64</action>
+				<action function="addsubtract">tw_swap_size-32</action>
 			</button>
 
 			<button style="button_quarter_width">
 				<placement x="%btn4_col4_x%" y="%row10_y%"/>
 				<text>{@part_sd_p=+}</text>
-				<action function="addsubtract">tw_swap_size+64</action>
+				<action function="addsubtract">tw_swap_size+32</action>
 			</button>
 
 			<text style="text_m_accent">
 				<placement x="%center_x%" y="%row13_y%" placement="5"/>
-				<text>{@file_system=File System:}</text>
+				<text>{@part_sd_data_sz=Data Size:}</text>
 			</text>
 
 			<text style="text_m">
 				<placement x="%center_x%" y="%row14a_y%" placement="5"/>
-				<text>%tw_sdpart_file_system%</text>
+				<text>%tw_data_size%</text>
 			</text>
 
 			<button style="button_quarter_width">
 				<placement x="%indent%" y="%row14_y%"/>
-				<text>EXT3</text>
-				<action function="set">tw_sdpart_file_system=ext3</action>
+				<text>{@part_sd_m=-}</text>
+				<action function="addsubtract">tw_data_size-128</action>
 			</button>
 
 			<button style="button_quarter_width">
 				<placement x="%btn4_col4_x%" y="%row14_y%"/>
+				<text>{@part_sd_p=+}</text>
+				<action function="addsubtract">tw_data_size+128</action>
+			</button>
+
+			<text style="text_m_accent">
+				<placement x="%center_x%" y="%row17_y%" placement="5"/>
+				<text>{@file_system=File System:}</text>
+			</text>
+
+			<text style="text_m">
+				<placement x="%center_x%" y="%row18a_y%" placement="5"/>
+				<text>%tw_data_file_system%</text>
+			</text>
+
+			<button style="button_quarter_width">
+				<placement x="%indent%" y="%row18_y%"/>
 				<text>EXT4</text>
-				<action function="set">tw_sdpart_file_system=ext4</action>
+				<action function="set">tw_data_file_system=ext4</action>
+			</button>
+
+			<button style="button_quarter_width">
+				<placement x="%btn4_col4_x%" y="%row18_y%"/>
+				<text>F2FS</text>
+				<action function="set">tw_data_file_system=f2fs</action>
 			</button>
 
 			<slider>
