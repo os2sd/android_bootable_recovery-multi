@@ -215,6 +215,7 @@ else
 endif
 endif
 ifeq ($(BOARD_HAS_NO_REAL_SDCARD),)
+    RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/gdisk
     RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/sgdisk
 endif
 ifeq ($(TWRP_INCLUDE_LOGCAT), true)

@@ -1834,7 +1834,7 @@ int TWPartitionManager::Partition_SDCard(void) {
 	}
 
 	// Convert GPT to MBR
-	Command = "sgdisk --gpttombr " + Device;
+	Command = "echo -e 'r\ng\nw\ny' | gdisk " + Device;
 	if (TWFunc::Exec_Cmd(Command) != 0)
 		LOGINFO("Failed to covert partition GPT to MBR\n");
 

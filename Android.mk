@@ -375,6 +375,7 @@ ifneq ($(TW_NO_EXFAT), true)
 endif
 ifeq ($(BOARD_HAS_NO_REAL_SDCARD),)
     LOCAL_ADDITIONAL_DEPENDENCIES += sgdisk
+    LOCAL_ADDITIONAL_DEPENDENCIES += gdisk
 endif
 ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
     LOCAL_ADDITIONAL_DEPENDENCIES += openaes ../openaes/LICENSE
