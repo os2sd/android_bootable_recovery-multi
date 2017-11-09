@@ -21,8 +21,7 @@ enum ErrorCode {
     kNoError = -1,
     kLowBattery = 20,
     kZipVerificationFailure,
-    kZipOpenFailure,
-    kBootreasonInBlacklist
+    kZipOpenFailure
 };
 
 enum CauseCode {

@@ -120,7 +120,7 @@ LOCAL_STATIC_LIBRARIES :=
 LOCAL_SHARED_LIBRARIES :=
 
 LOCAL_STATIC_LIBRARIES += libguitwrp
-LOCAL_SHARED_LIBRARIES += libaosprecovery libz libc libcutils libstdc++ libtar libblkid libminuitwrp libminadbd libmtdutils libminzip libtwadbbu libbootloader_message
+LOCAL_SHARED_LIBRARIES += libaosprecovery libz libc libcutils libstdc++ libtar libblkid libminuitwrp libminadbd libmtdutils libminzip libtwadbbu
 LOCAL_SHARED_LIBRARIES += libcrecovery libtwadbbu libtwrpdigest
 
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
@@ -168,12 +168,6 @@ ifneq ($(TARGET_USERIMAGES_USE_EXT4), true)
     ifneq ($(wildcard external/lz4/Android.mk),)
         LOCAL_STATIC_LIBRARIES += liblz4
     endif
-endif
-
-ifeq ($(AB_OTA_UPDATER),true)
-    LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
-    LOCAL_SHARED_LIBRARIES += libhardware
-    LOCAL_ADDITIONAL_DEPENDENCIES += libhardware
 endif
 
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
@@ -370,7 +364,6 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
     mkfs.fat \
     permissive.sh \
     simg2img_twrp \
-    libbootloader_message \
     init.recovery.service.rc
 
 ifneq ($(TARGET_ARCH), arm64)
@@ -593,7 +586,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libaosprecovery
 LOCAL_MODULE_TAGS := eng optional
 LOCAL_CFLAGS := -std=gnu++0x
-LOCAL_SRC_FILES := adb_install.cpp asn1_decoder.cpp legacy_property_service.cpp set_metadata.cpp tw_atomic.cpp installcommand.cpp
+LOCAL_SRC_FILES := adb_install.cpp asn1_decoder.cpp bootloader.cpp legacy_property_service.cpp set_metadata.cpp tw_atomic.cpp installcommand.cpp
 LOCAL_SHARED_LIBRARIES += libc liblog libcutils libmtdutils libfusesideload libselinux libminzip
 LOCAL_CFLAGS += -DRECOVERY_API_VERSION=$(RECOVERY_API_VERSION)
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
@@ -638,7 +631,6 @@ include $(LOCAL_PATH)/tests/Android.mk \
     $(LOCAL_PATH)/tools/Android.mk \
     $(LOCAL_PATH)/edify/Android.mk \
     $(LOCAL_PATH)/otafault/Android.mk \
-    $(LOCAL_PATH)/bootloader_message/Android.mk \
     $(LOCAL_PATH)/updater/Android.mk \
     $(LOCAL_PATH)/update_verifier/Android.mk \
     $(LOCAL_PATH)/applypatch/Android.mk
